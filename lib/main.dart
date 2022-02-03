@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodwifi/flutterflowpage/pages/createStory.page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LoginPage(),
+      home: const CreateStory(),
     );
   }
 }
