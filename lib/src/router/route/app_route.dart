@@ -8,7 +8,7 @@ import 'package:foodwifi/src/flutterflowpage/pages/createStory.page.dart';
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
-    AutoRoute(page: CalenderRangeTime, initial: true),
+    AutoRoute(page: CalendarTime, initial: true),
   ],
 )
 class $AppRouter {}

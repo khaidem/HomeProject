@@ -72,7 +72,9 @@ class _CalenderRangeTimeState extends State<CalenderRangeTime> {
   Future pickDateRange(BuildContext context) async {
     final initialDateRange = DateTimeRange(
       start: DateTime.now(),
-      end: DateTime.now().add(const Duration(hours: 24 * 3)),
+      end: DateTime.now().add(
+        const Duration(hours: 24 * 3),
+      ),
     );
     final newDateRange = await showDateRangePicker(
       context: context,

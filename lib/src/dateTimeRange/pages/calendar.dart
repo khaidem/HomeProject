@@ -8,33 +8,54 @@ class CalendarTime extends StatefulWidget {
 }
 
 class _CalendarState extends State<CalendarTime> {
-  DateTimeRange dateRange = DateTimeRange(
-    start: DateTime(2022, 11, 5),
-    end: DateTime(2022, 12, 24),
-  );
+  String _selectedDate = "Start - end  And Time";
+  DateTimeRange? dateRange;
+
+  Future dateTime(BuildContext context) async {
+    final initialDateRange = DateTimeRange(
+      start: DateTime.now(),
+      end: DateTime.now().add(
+        Duration(hours: 24 * 3),
+      ),
+    );
+    final newDateRange = await showDateRangePicker(
+      context: context,
+      firstDate: DateTime(DateTime.now().year - 5),
+      lastDate: DateTime(DateTime.now().year + 5),
+      initialDateRange: dateRange ?? initialDateRange,
+    );
+    if (newDateRange == null) {
+      setState(() {
+        _selectedDate = newDateRange.toString();
+      });
+    }
+
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+        body: Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                _selectedDate,
+              ),
+              IconButton(
+                onPressed: () {
+                  dateTime(context);
+                },
+                icon: const Icon(Icons.calendar_today),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    final start = dateRange.start;
-    final end = dateRange.end;
-    return Scaffold(
-      body: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: Text('${start.year},'),
-                ),
-              )
-            ],
-          )
-        ],
-      ),
-    );
+    // TODO: implement build
+    throw UnimplementedError();
   }
 }

@@ -13,7 +13,7 @@
 import 'package:auto_route/auto_route.dart' as _i2;
 import 'package:flutter/material.dart' as _i3;
 
-import '../../dateTimeRange/pages/calenderangetime.dart' as _i1;
+import '../../dateTimeRange/pages/calendar.dart' as _i1;
 
 class AppRouter extends _i2.RootStackRouter {
   AppRouter([_i3.GlobalKey<_i3.NavigatorState>? navigatorKey])
@@ -21,21 +21,21 @@ class AppRouter extends _i2.RootStackRouter {
 
   @override
   final Map<String, _i2.PageFactory> pagesMap = {
-    CalenderRangeTime.name: (routeData) {
+    CalendarTime.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i1.CalenderRangeTime());
+          routeData: routeData, child: const _i1.CalendarTime());
     }
   };
 
   @override
   List<_i2.RouteConfig> get routes =>
-      [_i2.RouteConfig(CalenderRangeTime.name, path: '/')];
+      [_i2.RouteConfig(CalendarTime.name, path: '/')];
 }
 
 /// generated route for
-/// [_i1.CalenderRangeTime]
-class CalenderRangeTime extends _i2.PageRouteInfo<void> {
-  const CalenderRangeTime() : super(CalenderRangeTime.name, path: '/');
+/// [_i1.CalendarTime]
+class CalendarTime extends _i2.PageRouteInfo<void> {
+  const CalendarTime() : super(CalendarTime.name, path: '/');
 
-  static const String name = 'CalenderRangeTime';
+  static const String name = 'CalendarTime';
 }
