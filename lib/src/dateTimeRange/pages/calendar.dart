@@ -11,9 +11,17 @@ class CalendarTime extends StatefulWidget {
 }
 
 class _CalendarState extends State<CalendarTime> {
-  DateTime selectedDate = DateTime.now();
-  final DateFormat dateFormat = DateFormat('yyyy-MM-dd- HH:mm');
-  String _selectedDate = "Start - end Date  And Time";
+  // DateTime selectedDate = DateTime.now();
+  // final DateFormat dateFormat = DateFormat('dd-MM-yyyy- HH:mm');
+  // final String _selectedDate = "Start - end Date  And Time";
+  DateTime? dateTime;
+  String getText() {
+    if (dateTime == null) {
+      return 'Start - end and Time';
+    } else {
+      return DateFormat('dd/MM/yyyy HH:mm').format(dateTime!);
+    }
+  }
 
   // Future _openDatePicker(BuildContext context) async {
   //   final initialDateRange = DateTimeRange(
@@ -48,28 +56,29 @@ class _CalendarState extends State<CalendarTime> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              _selectedDate,
+              getText(),
             ),
             IconButton(
-              onPressed: () async {
-                final selectedDate = await _selectDateTime(context);
-                if (selectedDate == null) return;
+              onPressed: () {
+                pickDateTime(context);
+                // final selectedDate = await _selectDateTime(context);
+                // if (selectedDate == null) return;
 
-                (selectedDate);
+                // (selectedDate);
 
-                final selectedTime = await _selectTime(context);
-                if (selectedTime == null) return;
-                (selectedTime);
+                // final selectedTime = await _selectTime(context);
+                // if (selectedTime == null) return;
+                // (selectedTime);
 
-                setState(() {
-                  this.selectedDate = DateTime(
-                    selectedDate.year,
-                    selectedDate.month,
-                    selectedDate.day,
-                    selectedDate.hour,
-                    selectedDate.minute,
-                  );
-                });
+                // setState(() {
+                //   dateTime = DateTime(
+                //     selectedDate.year,
+                //     selectedDate.month,
+                //     selectedDate.day,
+                //     selectedDate.hour,
+                //     selectedDate.minute,
+                //   );
+                // });
               },
               icon: const Icon(Icons.calendar_today),
             ),
@@ -79,17 +88,64 @@ class _CalendarState extends State<CalendarTime> {
     );
   }
 
-  Future _selectTime(BuildContext context) {
-    final now = DateTime.now();
+  Future pickDateTime(BuildContext context) async {
+    final date = await pickDate(context);
+    if (date == null) return;
 
-    return showTimePicker(
-        context: context,
-        initialTime: TimeOfDay(hour: now.hour, minute: now.minute));
+    final time = await pickTime(context);
+    if (time == null) return;
+
+    setState(() {
+      dateTime = DateTime(
+        date.year,
+        date.month,
+        date.day,
+        time.hour,
+        time.minute,
+      );
+    });
   }
 
-  Future _selectDateTime(BuildContext context) => showDatePicker(
+  Future<DateTime?> pickDate(BuildContext context) async {
+    final initialDate = DateTime.now();
+    final newDate = await showDatePicker(
       context: context,
-      initialDate: DateTime.now().add(const Duration(seconds: 1)),
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2100));
+      initialDate: dateTime ?? initialDate,
+      firstDate: DateTime(DateTime.now().year - 5),
+      lastDate: DateTime(DateTime.now().year + 5),
+    );
+
+    if (newDate == null) return null;
+
+    return newDate;
+  }
+
+  Future<TimeOfDay?> pickTime(BuildContext context) async {
+    const initialTime = TimeOfDay(hour: 9, minute: 0);
+    final newTime = await showTimePicker(
+      context: context,
+      initialTime: dateTime != null
+          ? TimeOfDay(hour: dateTime!.hour, minute: dateTime!.minute)
+          : initialTime,
+    );
+
+    if (newTime == null) return null;
+
+    return newTime;
+  }
+
+//   Future _selectTime(BuildContext context) {
+//     final now = DateTime.now();
+
+//     return showTimePicker(
+//         context: context,
+//         initialTime: TimeOfDay(hour: now.hour, minute: now.minute));
+//   }
+
+//   Future _selectDateTime(BuildContext context) => showDatePicker(
+//       context: context,
+//       initialDate: DateTime.now().add(const Duration(seconds: 1)),
+//       firstDate: DateTime.now(),
+//       lastDate: DateTime(2100));
+// }
 }
