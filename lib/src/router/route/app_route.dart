@@ -4,11 +4,12 @@ import 'package:foodwifi/src/dateTimeRange/pages/calenderangetime.dart';
 
 import 'package:foodwifi/src/dateTimeRange/pages/datetimepicker.dart';
 import 'package:foodwifi/src/flutterflowpage/pages/createStory.page.dart';
+import 'package:foodwifi/src/imagePicker/pages/imagepicker.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
-    AutoRoute(page: CalendarTime, initial: true),
+    AutoRoute(page: ImagePicker, initial: true),
   ],
 )
 class $AppRouter {}

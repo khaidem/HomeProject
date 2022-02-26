@@ -15,6 +15,8 @@ class _CalendarState extends State<CalendarTime> {
   // final DateFormat dateFormat = DateFormat('dd-MM-yyyy- HH:mm');
   // final String _selectedDate = "Start - end Date  And Time";
   DateTime? dateTime;
+  DateTimeRange? dateRange;
+  TimeOfDay? time;
   String getText() {
     if (dateTime == null) {
       return 'Start - end and Time';
@@ -94,6 +96,12 @@ class _CalendarState extends State<CalendarTime> {
 
     final time = await pickTime(context);
     if (time == null) return;
+    // } else {
+    //   final hours = time!.hour.toString();
+    //   final minutes = time!.minute.toString();
+
+    //   return '$hours: $minutes';
+    // }
 
     setState(() {
       dateTime = DateTime(
@@ -106,32 +114,45 @@ class _CalendarState extends State<CalendarTime> {
     });
   }
 
-  Future<DateTime?> pickDate(BuildContext context) async {
-    final initialDate = DateTime.now();
-    final newDate = await showDatePicker(
+  Future pickDate(BuildContext context) async {
+    final initialDateRange = DateTimeRange(
+        start: DateTime.now(),
+        end: DateTime.now().add(const Duration(hours: 24 * 3)));
+    final newDateRange = await showDateRangePicker(
       context: context,
-      initialDate: dateTime ?? initialDate,
+      //print(1 ?? 3); // <-- Prints 1.
+      //print(null ?? 12); // <-- Prints 12.
+      initialDateRange: dateRange ?? initialDateRange,
       firstDate: DateTime(DateTime.now().year - 5),
       lastDate: DateTime(DateTime.now().year + 5),
     );
+    // (newDateRange);
 
-    if (newDate == null) return null;
+    if (newDateRange == null) return;
 
-    return newDate;
+    return newDateRange;
+    // setState(() {
+    //   dateRange = newDateRange;
+    // });
   }
 
-  Future<TimeOfDay?> pickTime(BuildContext context) async {
+  Future pickTime(BuildContext context) async {
     const initialTime = TimeOfDay(hour: 9, minute: 0);
     final newTime = await showTimePicker(
       context: context,
-      initialTime: dateTime != null
-          ? TimeOfDay(hour: dateTime!.hour, minute: dateTime!.minute)
-          : initialTime,
+      initialTime: time ?? initialTime,
+      // initialTime: dateTime != null
+      //     ? TimeOfDay(hour: dateTime!.hour, minute: dateTime!.minute)
+      //     : initialTime,
     );
+    // (newTime);
 
-    if (newTime == null) return null;
+    if (newTime == null) return;
 
     return newTime;
+    // setState(() {
+    //   time = newTime;
+    // });
   }
 
 //   Future _selectTime(BuildContext context) {
