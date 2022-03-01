@@ -14,10 +14,15 @@ class _HomePageState extends State<HomePage> {
   final databaseRef = FirebaseDatabase.instance.ref("Student");
 
   void printFirebase() {
-    // log(databaseRef.child("Student").toString());
+    log(databaseRef.child("Student").toString());
     DatabaseReference child = databaseRef.child("Student");
     (databaseRef.key);
   }
+//   void readData(){
+//   databaseRef.once().then((DataSnapshot snapshot) {
+//     ('Data : ${snapshot.value}');
+//   });
+// }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +39,7 @@ class _HomePageState extends State<HomePage> {
               ElevatedButton(
                 child: const Text('Read Data'),
                 onPressed: () {
-                  printFirebase();
+                  readData();
                 },
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
