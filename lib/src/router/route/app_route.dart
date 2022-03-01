@@ -3,13 +3,15 @@ import 'package:foodwifi/src/dateTimeRange/pages/calendar.dart';
 import 'package:foodwifi/src/dateTimeRange/pages/calenderangetime.dart';
 
 import 'package:foodwifi/src/dateTimeRange/pages/datetimepicker.dart';
+import 'package:foodwifi/src/firebaseRealTime/pages/DemoRealTime.dart';
 import 'package:foodwifi/src/flutterflowpage/pages/createStory.page.dart';
 import 'package:foodwifi/src/imagePicker/pages/imagepicker.dart';
+import 'package:foodwifi/src/router/router.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
-    AutoRoute(page: ImagePicker, initial: true),
+    AutoRoute(page: HomePage, initial: true),
   ],
 )
 class $AppRouter {}
