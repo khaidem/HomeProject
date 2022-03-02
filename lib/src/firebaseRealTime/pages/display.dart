@@ -1,87 +1,87 @@
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
+// import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_database/firebase_database.dart';
+// import 'package:firebase_database/ui/firebase_animated_list.dart';
 
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 
-class RealTimeDataBase extends StatefulWidget {
-  const RealTimeDataBase({Key? key}) : super(key: key);
+// class RealTimeDataBase extends StatefulWidget {
+//   const RealTimeDataBase({Key? key}) : super(key: key);
 
-  @override
-  State<RealTimeDataBase> createState() => _RealTimeDataBaseState();
-}
+//   @override
+//   State<RealTimeDataBase> createState() => _RealTimeDataBaseState();
+// }
 
-class _RealTimeDataBaseState extends State<RealTimeDataBase> {
-  final ref = FirebaseDatabase.instance.ref();
-  late DatabaseReference databaseReference;
-  final editText = TextEditingController();
-  final newCreate = "newCreate";
-  // setData() {
-  //   ref.child('info').set({
-  //     'id': "10",
-  //     'name': 'Denish',
-  //     'Contact': "9366304598",
-  //     'Country': 'Hero',
-  //   }).asStream();
-  // }
+// class _RealTimeDataBaseState extends State<RealTimeDataBase> {
+//   final ref = FirebaseDatabase.instance.ref();
+//   late DatabaseReference databaseReference;
+//   final editText = TextEditingController();
+//   final newCreate = "newCreate";
+//   // setData() {
+//   //   ref.child('info').set({
+//   //     'id': "10",
+//   //     'name': 'Denish',
+//   //     'Contact': "9366304598",
+//   //     'Country': 'Hero',
+//   //   }).asStream();
+//   // }
 
-  showData() {
-    ref.once().then((snapshot) {
-      print(snapshot);
-    });
-  }
+//   showData() {
+//     ref.once().then((snapshot) {
+//       print(snapshot);
+//     });
+//   }
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    databaseReference = ref;
-  }
+//   @override
+//   void initState() {
+//     // TODO: implement initState
+//     super.initState();
+//     databaseReference = ref;
+//   }
 
-  final Future<FirebaseApp> _future = Firebase.initializeApp();
+//   final Future<FirebaseApp> _future = Firebase.initializeApp();
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Firebase Demo"),
-      ),
-      body: Column(
-        children: [
-          TextField(
-            controller: editText,
-          ),
-          ElevatedButton(
-            onPressed: () {
-              ref.child(newCreate).set(editText.text);
-            },
-            child: const Text('submit'),
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0),
-              ),
-            ),
-          ),
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text("Firebase Demo"),
+//       ),
+//       body: Column(
+//         children: [
+//           TextField(
+//             controller: editText,
+//           ),
+//           ElevatedButton(
+//             onPressed: () {
+//               ref.child(newCreate).set(editText.text);
+//             },
+//             child: const Text('submit'),
+//             style: ElevatedButton.styleFrom(
+//               shape: RoundedRectangleBorder(
+//                 borderRadius: BorderRadius.circular(30.0),
+//               ),
+//             ),
+//           ),
 
-          // TextButton(
-          //   onPressed: setData,
-          //   child: const Text('setData'),
-          // ),
-          FirebaseAnimatedList(
-              shrinkWrap: true,
-              query: databaseReference,
-              itemBuilder: (BuildContext context, DataSnapshot snapshot,
-                  Animation animation, int index) {
-                return ListTile(
-                  leading: Text(snapshot.value.toString()),
-                  // leading: Text(snapshot.value['Country']),
-                  // title: Text(snapshot.value['name']),
-                  // subtitle: Text(snapshot.value['country']),
-                  // trailing: Text(snapshot.value['contact'].toString()),
-                );
-              })
-        ],
-      ),
-    );
-  }
-}
+//           // TextButton(
+//           //   onPressed: setData,
+//           //   child: const Text('setData'),
+//           // ),
+//           FirebaseAnimatedList(
+//               shrinkWrap: true,
+//               query: databaseReference,
+//               itemBuilder: (BuildContext context, DataSnapshot snapshot,
+//                   Animation animation, int index) {
+//                 return ListTile(
+//                   leading: Text(snapshot.value.toString()),
+//                   // leading: Text(snapshot.value['Country']),
+//                   // title: Text(snapshot.value['name']),
+//                   // subtitle: Text(snapshot.value['country']),
+//                   // trailing: Text(snapshot.value['contact'].toString()),
+//                 );
+//               })
+//         ],
+//       ),
+//     );
+//   }
+// }

@@ -13,7 +13,7 @@
 import 'package:auto_route/auto_route.dart' as _i2;
 import 'package:flutter/material.dart' as _i3;
 
-import '../../firebaseRealTime/pages/realtime.dart' as _i1;
+import '../../firebaseRealTime/pages/homePage.dart' as _i1;
 
 class AppRouter extends _i2.RootStackRouter {
   AppRouter([_i3.GlobalKey<_i3.NavigatorState>? navigatorKey])
@@ -21,21 +21,21 @@ class AppRouter extends _i2.RootStackRouter {
 
   @override
   final Map<String, _i2.PageFactory> pagesMap = {
-    Realtime.name: (routeData) {
+    HomeRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i1.Realtime());
+          routeData: routeData, child: const _i1.HomePage());
     }
   };
 
   @override
   List<_i2.RouteConfig> get routes =>
-      [_i2.RouteConfig(Realtime.name, path: '/')];
+      [_i2.RouteConfig(HomeRoute.name, path: '/')];
 }
 
 /// generated route for
-/// [_i1.Realtime]
-class Realtime extends _i2.PageRouteInfo<void> {
-  const Realtime() : super(Realtime.name, path: '/');
+/// [_i1.HomePage]
+class HomeRoute extends _i2.PageRouteInfo<void> {
+  const HomeRoute() : super(HomeRoute.name, path: '/');
 
-  static const String name = 'Realtime';
+  static const String name = 'HomeRoute';
 }

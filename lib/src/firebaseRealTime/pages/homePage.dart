@@ -3,14 +3,14 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 
-class Realtime extends StatefulWidget {
-  const Realtime({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<Realtime> createState() => _RealtimeState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _RealtimeState extends State<Realtime> {
+class _HomePageState extends State<HomePage> {
   final ref = FirebaseDatabase.instance.ref();
   late DatabaseReference databaseReference;
   final editText = TextEditingController();
