@@ -7,6 +7,8 @@ import 'package:foodwifi/src/router/route/app_route.gr.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initialzeApp();
 
   final _appRouter = AppRouter();
   runApp(MyApp(

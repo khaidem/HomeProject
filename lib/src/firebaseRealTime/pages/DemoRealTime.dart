@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -11,46 +13,93 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final databaseRef = FirebaseDatabase.instance.ref("Student");
-
-  void printFirebase() {
-    log(databaseRef.child("Student").toString());
-    DatabaseReference child = databaseRef.child("Student");
-    (databaseRef.key);
-  }
-//   void readData(){
-//   databaseRef.once().then((DataSnapshot snapshot) {
-//     ('Data : ${snapshot.value}');
-//   });
-// }
-
+  final ref = FirebaseDatabase.instance.ref().child("Student");
+  final name = "Name";
+  final newText = TextEditingController();
+  var retrivedName;
   @override
   Widget build(BuildContext context) {
+    // final fb = ref.ref();
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Firebase RealTime DataBase'),
-      ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              ElevatedButton(
-                child: const Text('Read Data'),
-                onPressed: () {
-                  readData();
-                },
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                ),
-              ),
-            ],
-          ),
+        appBar: AppBar(
+          title: const Text('Firebase RealTime DataBase'),
         ),
-      ),
-    );
+        body: Column(
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(name),
+                const SizedBox(width: 20),
+                Expanded(child: TextField(controller: newText)),
+              ],
+            ),
+            ElevatedButton(
+              onPressed: () {
+                ref.child("Name").once().then((DatabaseEvent event) {
+                  print(event);
+
+                  setState(() {
+                    retrivedName = event;
+                  });
+                });
+              },
+              child: const Text("Get"),
+            ),
+            Text(retrivedName ?? ""),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     ref.child(name).set(newText.text);
+            //   },
+            //   child: const Text("Submit"),
+            // ),
+          ],
+        ));
   }
 }
+//   @override
+//   void dispose() {
+//     // Clean up the controller when the widget is disposed.
+//     newText.dispose();
+//     super.dispose();
+//   }
+// }
+      // body: Center(
+      //   child: Padding(
+      //     padding: const EdgeInsets.all(16.0),
+      //     child: Column(
+      //       crossAxisAlignment: CrossAxisAlignment.stretch,
+      //       children: <Widget>[
+      //         TextField(
+      //           controller: newText,
+      //           textAlign: TextAlign.center,
+      //         ),
+      //         // FlatButton(
+      //         //     onPressed: () {
+      //         //       ref.child('Movies').push().child(newText.text).asStream();
+      //         //     },
+      //         //     child: Text('Save'))
+      //         ElevatedButton(
+      //           child: const Text('Read Data'),
+      //           onPressed: () {
+      //             ref.child("Name").once().then((DataSnapshot data){
+      //               print(data.value);
+      //               print(data.key);
+      //               setState(() {
+      //                 retrievedName =data.value;
+      //               });
+      //             })
+      //           },
+      //           style: ElevatedButton.styleFrom(
+      //             shape: RoundedRectangleBorder(
+      //               borderRadius: BorderRadius.circular(30.0),
+      //             ),
+      //           ),
+      //         ),
+      //       ],
+      //     ),
+      //   ),
+      // ),
+//     );
+//   }
+// }
