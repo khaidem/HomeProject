@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
 
   showData() {
     ref.once().then((snapshot) {
-      print(snapshot);
+      (snapshot);
     });
   }
 
